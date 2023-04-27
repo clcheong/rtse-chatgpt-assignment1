@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CF Tomorrow - Forecasts</title>
+    <title>CF Tomorrow - Analytics</title>
     <link rel="icon" type="image/x-icon" href="./img/logo-only-removebg.ico">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" integrity="sha512-ZnR2wlLbSbr8/c9AgLg3jQPAattCUImNsae6NHYnS9KrIwRdcY9DxFotXhNAKIKbAXlRnujIqUWoXXwqyFOeIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -211,7 +211,7 @@
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input id="searchInput" type="text" class="form-control bg-light border-0 small"
+                                        <input type="text" class="form-control bg-light border-0 small"
                                             placeholder="Search for..." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
@@ -317,40 +317,59 @@
                 <!-- Begin Page Content -->
 
                 <div class="container-fluid">
-                    <h1 class="mt-4">Carbon Footprint Forecast</h1>
-                    <div class="row">
-                      <div class="col-xl-12">
-                        <div class="card mb-4">
-                          <div class="card-header">
-                            <i class="fas fa-search mr-1"></i>
-                            Generate your personalized carbon footprint charts
-                          </div>
-                          <div class="card-body">
-                            <div class="input-group">
-                              <input type="text" class="form-control" placeholder="Enter query...">
-                              <!-- <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">Generate</button>
-                              </div> -->
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xl-12">
-                        <div class="card mb-4">
-                          <div class="card-header">
-                            <i class="fas fa-chart-area mr-1"></i>
-                            Chart Display Area
-                          </div>
-                          <div class="card-body">
-                            <canvas id="myChart" width="100%" height="350vh"></canvas>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Analytics</h1>
                   
+                    <!-- Chart 1: Bar Chart -->
+                    <div class="row">
+                      <div class="col-xl-8 col-lg-12">
+                        <div class="card mb-4">
+                          <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                          </div>
+                          <div class="card-body">
+                            <canvas id="chart1"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4 col-lg-12">
+                        <div class="card mb-4">
+                          <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Insights & Predictions</h6>
+                          </div>
+                          <div class="card-body">
+                            <p>Our carbon footprint emissions decreased by 10% in Q1 of this year compared to the same period last year. This could be due to the implementation of a new sustainability initiative we launched in January. We expect this trend to continue as we introduce more eco-friendly practices in our operations and supply chain, leading to further reductions in our carbon emissions in the next quarter.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <!-- Chart 2: Line Chart -->
+                    <div class="row">
+                      <div class="col-xl-8 col-lg-12">
+                        <div class="card mb-4">
+                          <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Line Chart</h6>
+                          </div>
+                          <div class="card-body">
+                            <canvas id="chart2"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4 col-lg-12">
+                        <div class="card mb-4">
+                          <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Insights & Predictions</h6>
+                          </div>
+                          <div class="card-body">
+                            <p>Carbon emissions from transportation decreased by 5% in the last month, which could be due to a decrease in the use of fossil fuel-powered vehicles. We expect emissions to continue to decrease in the next month as we transition to more sustainable transportation options, such as electric vehicles and public transportation.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                  </div>
                   
                   
                   
@@ -426,88 +445,101 @@
 
 <script>
 
-// Get the canvas element and context
-var canvas = document.getElementById("myChart");
-var ctx = canvas.getContext("2d");
-
-// Set the default chart type to bar
-var chartType = "bar";
-
-// Define the chart data for each type
-var chartData = {
-  bar: {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-      {
-        label: "Carbon Footprint from January to July 2023",
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
-        data: [10, 20, 30, 40, 50, 60, 70],
-      },
-    ],
-  },
-  line: {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-      {
-        label: "Carbon Footprint from January to July 2023",
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
-        data: [10, 20, 30, 40, 50, 60, 70],
-      },
-    ],
-  },
-  pie: {
-    labels: ["Water", "Electricity", "Waste"],
-    datasets: [
-      {
-        label: "Carbon Footprint from January to July 2023",
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        data: [10, 20, 30],
-      },
-    ],
-  },
-};
-
-// Get the search input and button elements
-var searchInput = document.querySelector(".card-body input[type='text']");
-var searchBtn = document.querySelector(".card-body button");
-
-// Add an event listener to the search button
-searchInput.addEventListener("input", function () {
-  // Get the search keyword
-  var keyword = searchInput.value.toLowerCase();
-
-  // Determine the chart type based on the keyword
-  if (keyword.includes("line")) {
-    chartType = "line";
-  } else if (keyword.includes("pie")) {
-    chartType = "pie";
-  } else {
-    chartType = "bar";
-  }
-  
-
-  // Destroy the old chart and create a new one with the new chart type and data
-  var oldChart = Chart.getChart(canvas);
-  if (oldChart) {
-    oldChart.destroy();
-  }
-
-  var newChart = new Chart(ctx, {
-    type: chartType,
-    data: chartData[chartType],
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-
-    },
-  });
-});
-
+    $(document).ready(function() {
+        // Chart 1 - Line Chart
+        var ctx1 = document.getElementById("chart1").getContext("2d");
+        var myLineChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+            label: "Carbon Footprint",
+            lineTension: 0.3,
+            backgroundColor: "rgba(2,117,216,0.2)",
+            borderColor: "rgba(2,117,216,1)",
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(2,117,216,1)",
+            pointBorderColor: "rgba(255,255,255,0.8)",
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(2,117,216,1)",
+            pointHitRadius: 50,
+            pointBorderWidth: 2,
+            data: [100, 150, 200, 250, 300, 350, 400],
+            }],
+        },
+        options: {
+            scales: {
+            xAxes: [{
+                time: {
+                unit: 'date'
+                },
+                gridLines: {
+                display: false
+                },
+                ticks: {
+                maxTicksLimit: 7
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                min: 0,
+                max: 500,
+                maxTicksLimit: 5
+                },
+                gridLines: {
+                color: "rgba(0, 0, 0, .125)",
+                }
+            }],
+            },
+            legend: {
+            display: false
+            }
+        }
+        });
+    
+        // Chart 2 - Bar Chart
+        var ctx2 = document.getElementById("chart2").getContext("2d");
+        var myBarChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+            label: "Carbon Footprint",
+            backgroundColor: "rgba(2,117,216,1)",
+            borderColor: "rgba(2,117,216,1)",
+            data: [100, 150, 200, 250, 300, 350, 400],
+            }],
+        },
+        options: {
+            scales: {
+            xAxes: [{
+                time: {
+                unit: 'month'
+                },
+                gridLines: {
+                display: false
+                },
+                ticks: {
+                maxTicksLimit: 6
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                min: 0,
+                max: 500,
+                maxTicksLimit: 5
+                },
+                gridLines: {
+                display: true
+                }
+            }],
+            },
+            legend: {
+            display: false
+            }
+        }
+        });
+    });      
 
 </script>
 
